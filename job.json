@@ -1,0 +1,47 @@
+{
+  "apiVersion": "batch/v1",
+  "kind": "Job",
+  "metadata": {
+    "name": "llm-job-mistralai",
+    "namespace": "tenant-1"
+  },
+  "spec": {
+    "template": {
+      "spec": {
+        "containers": [
+          {
+            "name": "llm-mistralai-container",
+            "image": "252226608135.dkr.ecr.ap-south-1.amazonaws.com/mistralai_llm_model_demo:latest",
+            "command": ["/app/entrypoint.sh"],
+            "args": [""],
+            "env": [
+              {
+                "name": "HUGGINGFACE_TOKEN",
+                "value": ""
+              }
+            ],
+            "resources": {
+              "limits": {
+                "nvidia.com/gpu": 1
+              }
+            },
+            "volumeMounts": [
+              {
+                "name": "cache",
+                "mountPath": "/root/.cache"
+              }
+            ]
+          }
+        ],
+        "restartPolicy": "Never",
+        "volumes": [
+          {
+            "name": "cache",
+            "emptyDir": {}
+          }
+        ]
+      }
+    },
+    "backoffLimit": 1
+  }
+}
