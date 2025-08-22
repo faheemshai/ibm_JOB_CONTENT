@@ -11,7 +11,7 @@
         "containers": [
           {
             "name": "llm-mistralai-container",
-            "image": "061051261134.dkr.ecr.ap-south-1.amazonaws.com/mistralai_llm_model_demo:latest",
+            "image": "ghcr.io/huggingface/text-generation-inference:latest",
             "command": ["/app/entrypoint.sh"],
             "args": [""],
             "env": [
